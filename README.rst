@@ -1,3 +1,16 @@
+BIDIRECTIONAL CROWD FLOWS WITH INTRODUCTION OF OBSTACLES
+========================================================
+
+Code for the project of the course Complex System Simulation, UvA 2021.
+
+The contributors of this project are:
+- Caterina Buranelli
+- Marija Pujic
+- Robert van Koesveld
+- Iris Reitsma
+
+
+
 .. image:: https://travis-ci.org/svenkreiss/socialforce.svg?branch=master
     :target: https://travis-ci.org/svenkreiss/socialforce
 
@@ -38,14 +51,4 @@ Ped-Ped-Space Scenarios
 | 30 pedestrians:                        | 60 pedestrians:                        |
 |                                        |                                        |
 | .. image:: docs/walkway_30.gif         | .. image:: docs/walkway_60.gif         |
-+----------------------------------------+----------------------------------------+
-
-
-Ped-Ped Scenarios
-=================
-
-+----------------------------------------+----------------------------------------+
-| .. image:: docs/crossing.png           | .. image:: docs/narrow_crossing.png    |
-+----------------------------------------+----------------------------------------+
-| .. image:: docs/opposing.png           | .. image:: docs/2opposing.png          |
-+----------------------------------------+----------------------------------------+
++----------------------------------------+----------------------------------------
