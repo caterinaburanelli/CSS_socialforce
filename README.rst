@@ -4,9 +4,13 @@ BIDIRECTIONAL CROWD FLOWS WITH INTRODUCTION OF OBSTACLES
 Code for the project of the course Complex System Simulation, UvA 2021.
 
 The contributors of this project are:
+
 - Caterina Buranelli
+
 - Marija Pujic
+
 - Robert van Koesveld
+
 - Iris Reitsma
 
 
@@ -52,3 +56,4 @@ Ped-Ped-Space Scenarios
 |                                        |                                        |
 | .. image:: docs/walkway_30.gif         | .. image:: docs/walkway_60.gif         |
 +----------------------------------------+----------------------------------------
+
