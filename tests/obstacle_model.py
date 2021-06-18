@@ -132,7 +132,7 @@ def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=False):
     total=0
     out_l=0
     out_r=0
-    for i in range(250):
+    for i in range(500):
         generated += out_l + out_r
         state = s.step().state
         # periodic boundary conditions
@@ -219,8 +219,8 @@ def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=False):
     # make plots
 
 layouts = ["benchmark", "single", "pillars", "horizontal", "angled"]
-peop_num = np.linspace(20,121,5)
-sim_num = 2
+peop_num = np.linspace(20,120,20)
+sim_num = 50
 
 columns = ["layout", "peop_num", "run", "generated", "succes", "time", "avrg_time", "std_time", "velocity", "avrg_velocity", "std_velocity"]
 
