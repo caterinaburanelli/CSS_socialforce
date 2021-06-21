@@ -48,7 +48,7 @@ def visualize(states, space, output_filename):
 @pytest.mark.parametrize('half_len', [6])
 @pytest.mark.parametrize('half_width', [30])
 @pytest.mark.parametrize('mode', ["benchmark"])
-def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=True):
+def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=False):
 
    # pos_left = ((np.random.random((n, 2)) - 0.5) * 2.0) * np.array([half_width, half_len])
    # pos_right = ((np.random.random((n, 2)) - 0.5) * 2.0) * np.array([half_width, half_len])
