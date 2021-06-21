@@ -241,7 +241,7 @@ def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=True):
     paths = list(flatten(paths))
     paths = [paths[ind] for ind in nonzero]
 
-    velocities = [i / j for i, j in zip(times, paths)]
+    velocities = [i / j for i, j in zip(paths, times)]
 
 #    print(total, times, np.mean(times), velocities, np.mean(velocities)) # np.mean(times),, np.mean(velocities)
 
