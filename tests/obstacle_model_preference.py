@@ -1,6 +1,7 @@
 from contextlib import contextmanager
 from matplotlib.cbook import flatten
 import numpy as np
+from numpy import random
 import pytest
 import socialforce
 import pandas as pd
@@ -45,7 +46,7 @@ def visualize(states, space, output_filename):
         context['update_function'] = update
 
 
-@pytest.mark.parametrize('n', [100])
+@pytest.mark.parametrize('n', [4])
 @pytest.mark.parametrize('half_len', [6])
 @pytest.mark.parametrize('half_width', [30])
 @pytest.mark.parametrize('mode', ["single"])
@@ -168,11 +169,14 @@ def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=True):
 
         new_initial[indicess, 3] = [i]*(len(indicess))
         out_l = len(indicess)
-        
-        pos_left_20 = np.transpose(np.array([np.random.uniform(-half_width, -half_width+1, ceil(out_l*0.2)),np.random.uniform(-half_len, 0, ceil(out_l*0.2))]))
-        pos_left_80 = np.transpose(np.array([np.random.uniform(-half_width, -half_width+1, floor(out_l*0.8)),np.random.uniform(0, half_len, floor(out_l*0.8))]))
+        p = random.random()
+        if (p >= 0.5):
+            pos_left_20 = np.transpose(np.array([np.random.uniform(-half_width, -half_width+1, floor(out_l*0.2)),np.random.uniform(-half_len, 0, floor(out_l*0.2))]))
+            pos_left_80 = np.transpose(np.array([np.random.uniform(-half_width, -half_width+1, ceil(out_l*0.8)),np.random.uniform(0, half_len, ceil(out_l*0.8))]))
+        else:
+            pos_left_20 = np.transpose(np.array([np.random.uniform(-half_width, -half_width+1, ceil(out_l*0.2)),np.random.uniform(-half_len, 0, ceil(out_l*0.2))]))
+            pos_left_80 = np.transpose(np.array([np.random.uniform(-half_width, -half_width+1, floor(out_l*0.8)),np.random.uniform(0, half_len, floor(out_l*0.8))]))
         pos_left = np.concatenate((pos_left_80, pos_left_20))
-        
         x_vel_left = np.random.normal(1.34, 0.26, size=(out_l, 1))
         state[indicess, 0:3] = np.concatenate((pos_left, x_vel_left), axis=-1)
         new_times = i - new_initial[indicess,2]
@@ -196,8 +200,13 @@ def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=True):
 
         new_initial[indicess, 3] = i
         out_r = len(indicess)
-        pos_right_20 = np.transpose(np.array([np.random.uniform(half_width, half_width-1, floor(out_r*0.2)),np.random.uniform(0, half_len, floor(out_r*0.2))]))
-        pos_right_80 = np.transpose(np.array([np.random.uniform(half_width, half_width-1, ceil(out_r*0.8)),np.random.uniform(-half_len, 0, ceil(out_r*0.8))]))
+        p = random.random()
+        if (p >= 0.5):
+            pos_right_20 = np.transpose(np.array([np.random.uniform(half_width, half_width-1, floor(out_r*0.2)),np.random.uniform(0, half_len, floor(out_r*0.2))]))
+            pos_right_80 = np.transpose(np.array([np.random.uniform(half_width, half_width-1, ceil(out_r*0.8)),np.random.uniform(-half_len, 0, ceil(out_r*0.8))]))
+        else: 
+            pos_right_20 = np.transpose(np.array([np.random.uniform(half_width, half_width-1, ceil(out_r*0.2)),np.random.uniform(0, half_len, ceil(out_r*0.2))]))
+            pos_right_80 = np.transpose(np.array([np.random.uniform(half_width, half_width-1, floor(out_r*0.8)),np.random.uniform(-half_len, 0, floor(out_r*0.8))]))
         pos_right = np.concatenate((pos_right_80, pos_right_20))
 
         x_vel_right = np.random.normal(1.34, 0.26, size=(out_r, 1))
@@ -249,13 +258,10 @@ def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=True):
   # run 50 simulations
    # save the data
     # make plots
-"""
-layouts = ["pillars"]
-peop_num = np.linspace(20,120,20)
-sim_num = 50
 
-peop_num = np.linspace(20,120,20)
-sim_num = 50
+layouts = ["benchmark"]
+peop_num = np.linspace(20,120,10)
+sim_num = 30
 
 columns = ["layout", "peop_num", "run", "generated", "succes", "time", "avrg_time", "std_time", "velocity", "avrg_velocity", "std_velocity"]
 
@@ -273,9 +279,8 @@ for layout in layouts :
         new_df=pd.concat(dfs_runs)
         dfs_num.append(new_df)
     layout_df = pd.concat(dfs_num)
-    layout_df.to_csv('data/df_{}'.format(layout))
+    layout_df.to_csv('data_preference/df_{}'.format(layout))
     # layout_df.to_csv('data/df_{}_test'.format(layout))
     print('{} DONE'.format(layout))
     dfs_layout.append(layout_df)
 final_df = pd.concat(dfs_layout)
-"""
