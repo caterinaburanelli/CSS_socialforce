@@ -233,7 +233,7 @@ def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=True):
   # run 50 simulations
    # save the data
     # make plots
-"""
+
 layouts = ["pillars"]
 peop_num = np.linspace(20,120,20)
 sim_num = 50
@@ -262,4 +262,3 @@ for layout in layouts :
     print('{} DONE'.format(layout))
     dfs_layout.append(layout_df)
 final_df = pd.concat(dfs_layout)
-"""
