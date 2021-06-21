@@ -234,7 +234,7 @@ def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=True):
    # save the data
     # make plots
 
-layouts = ["pillars"]
+layouts = ["benchmark"]
 peop_num = np.linspace(20,120,20)
 sim_num = 50
 
@@ -257,7 +257,7 @@ for layout in layouts :
         new_df=pd.concat(dfs_runs)
         dfs_num.append(new_df)
     layout_df = pd.concat(dfs_num)
-    layout_df.to_csv('data/df_{}'.format(layout))
+    layout_df.to_csv('data_100/df_{}'.format(layout))
     # layout_df.to_csv('data/df_{}_test'.format(layout))
     print('{} DONE'.format(layout))
     dfs_layout.append(layout_df)
