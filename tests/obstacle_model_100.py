@@ -235,11 +235,9 @@ def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=True):
     # make plots
 
 layouts = ["benchmark"]
-peop_num = np.linspace(20,120,20)
-sim_num = 50
 
-peop_num = np.linspace(20,120,20)
-sim_num = 50
+peop_num = np.linspace(20,120,10)
+sim_num = 30
 
 columns = ["layout", "peop_num", "run", "generated", "succes", "time", "avrg_time", "std_time", "velocity", "avrg_velocity", "std_velocity"]
 
