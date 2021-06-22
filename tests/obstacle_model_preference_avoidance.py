@@ -1,9 +1,11 @@
 from contextlib import contextmanager
 from matplotlib.cbook import flatten
 import numpy as np
+from numpy import random
 import pytest
 import socialforce
 import pandas as pd
+from math import floor, ceil
 
 
 @contextmanager
@@ -44,17 +46,25 @@ def visualize(states, space, output_filename):
         context['update_function'] = update
 
 
-@pytest.mark.parametrize('n', [50])
+@pytest.mark.parametrize('n', [4])
 @pytest.mark.parametrize('half_len', [6])
 @pytest.mark.parametrize('half_width', [30])
-@pytest.mark.parametrize('mode', ["pillars"])
-def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=False):
+@pytest.mark.parametrize('mode', ["single"])
+def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=True):
 
    # pos_left = ((np.random.random((n, 2)) - 0.5) * 2.0) * np.array([half_width, half_len])
    # pos_right = ((np.random.random((n, 2)) - 0.5) * 2.0) * np.array([half_width, half_len])
 
-    pos_left = np.transpose(np.array([np.random.uniform(-half_width, half_width, n),np.random.uniform(0, half_len, n)]))
-    pos_right = np.transpose(np.array([np.random.uniform(-half_width, half_width, n),np.random.uniform(-half_len, 0, n)]))
+    n_20 = ceil(n*0.2)
+    n_80 = floor(n*0.8)
+    
+    pos_left_20 = np.transpose(np.array([np.random.uniform(-half_width, half_width, n_20),np.random.uniform(-half_len, 0, n_20)]))
+    pos_left_80 = np.transpose(np.array([np.random.uniform(-half_width, half_width, n_80),np.random.uniform(0, half_len, n_80)]))
+    pos_left = np.concatenate((pos_left_80, pos_left_20))
+    
+    pos_right_20 = np.transpose(np.array([np.random.uniform(-half_width, half_width, n_20),np.random.uniform(0, half_len, n_20)]))
+    pos_right_80 = np.transpose(np.array([np.random.uniform(-half_width, half_width, n_80),np.random.uniform(-half_len, 0, n_80)]))
+    pos_right = np.concatenate((pos_right_80, pos_right_20))
 
     generated = 2*n
 
@@ -159,7 +169,14 @@ def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=False):
 
         new_initial[indicess, 3] = [i]*(len(indicess))
         out_l = len(indicess)
-        pos_left = np.transpose(np.array([np.random.uniform(-half_width, -half_width+1, out_l),np.random.uniform(0, half_len, out_l)]))
+        p = random.random()
+        if (p >= 0.5):
+            pos_left_20 = np.transpose(np.array([np.random.uniform(-half_width, -half_width+1, floor(out_l*0.2)),np.random.uniform(-half_len, 0, floor(out_l*0.2))]))
+            pos_left_80 = np.transpose(np.array([np.random.uniform(-half_width, -half_width+1, ceil(out_l*0.8)),np.random.uniform(0, half_len, ceil(out_l*0.8))]))
+        else:
+            pos_left_20 = np.transpose(np.array([np.random.uniform(-half_width, -half_width+1, ceil(out_l*0.2)),np.random.uniform(-half_len, 0, ceil(out_l*0.2))]))
+            pos_left_80 = np.transpose(np.array([np.random.uniform(-half_width, -half_width+1, floor(out_l*0.8)),np.random.uniform(0, half_len, floor(out_l*0.8))]))
+        pos_left = np.concatenate((pos_left_80, pos_left_20))
         x_vel_left = np.random.normal(1.34, 0.26, size=(out_l, 1))
         state[indicess, 0:3] = np.concatenate((pos_left, x_vel_left), axis=-1)
         new_times = i - new_initial[indicess,2]
@@ -183,7 +200,15 @@ def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=False):
 
         new_initial[indicess, 3] = i
         out_r = len(indicess)
-        pos_right = np.transpose(np.array([np.random.uniform(half_width, half_width-1, out_r),np.random.uniform(-half_len, 0, out_r)]))
+        p = random.random()
+        if (p >= 0.5):
+            pos_right_20 = np.transpose(np.array([np.random.uniform(half_width, half_width-1, floor(out_r*0.2)),np.random.uniform(0, half_len, floor(out_r*0.2))]))
+            pos_right_80 = np.transpose(np.array([np.random.uniform(half_width, half_width-1, ceil(out_r*0.8)),np.random.uniform(-half_len, 0, ceil(out_r*0.8))]))
+        else: 
+            pos_right_20 = np.transpose(np.array([np.random.uniform(half_width, half_width-1, ceil(out_r*0.2)),np.random.uniform(0, half_len, ceil(out_r*0.2))]))
+            pos_right_80 = np.transpose(np.array([np.random.uniform(half_width, half_width-1, floor(out_r*0.8)),np.random.uniform(-half_len, 0, floor(out_r*0.8))]))
+        pos_right = np.concatenate((pos_right_80, pos_right_20))
+
         x_vel_right = np.random.normal(1.34, 0.26, size=(out_r, 1))
         state[indicess, 0:3] = np.concatenate((pos_right, x_vel_right), axis=-1)
 
@@ -233,10 +258,9 @@ def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=False):
   # run 50 simulations
    # save the data
     # make plots
-"""
-layouts = ["pillars"]
 
-peop_num = np.linspace(20,120,10)
+layouts = ["benchmark", "single", "pillars", "horizontal", "angled"]
+peop_num = [20, 40, 60, 80, 100]
 sim_num = 30
 
 columns = ["layout", "peop_num", "run", "generated", "succes", "time", "avrg_time", "std_time", "velocity", "avrg_velocity", "std_velocity"]
@@ -255,9 +279,8 @@ for layout in layouts :
         new_df=pd.concat(dfs_runs)
         dfs_num.append(new_df)
     layout_df = pd.concat(dfs_num)
-    layout_df.to_csv('data_100/df_{}'.format(layout))
+    layout_df.to_csv('data_preference_avoidance/df_{}'.format(layout))
     # layout_df.to_csv('data/df_{}_test'.format(layout))
     print('{} DONE'.format(layout))
     dfs_layout.append(layout_df)
 final_df = pd.concat(dfs_layout)
-"""
