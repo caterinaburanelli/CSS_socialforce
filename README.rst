@@ -67,15 +67,15 @@ Different setups together with the code for running of the simulations can be fo
 
     - layouts: 
         'benchmark'
-            .. image:: docs/walkway_benchmark_0_new4.gif 
+            .. image:: figures/walkway_benchmark_0_new4.gif 
         'horizontal'
-            .. image:: docs/walkway_horizontal_0_new4.gif 
+            .. image:: figures/walkway_horizontal_0_new4.gif 
         'pillars'
-            .. image:: docs/walkway_pillars_0_new4.gif 
+            .. image:: figures/walkway_pillars_0_new4.gif 
         'single'
-            .. image:: docs/walkway_single_0_new4.gif 
+            .. image:: figures/walkway_single_0_new4.gif 
         'angled'
-            .. image:: docs/walkway_angled_0_new4.gif 
+            .. image:: figures/walkway_angled_0_new4.gif 
         
         - number of people in the system at all times
         
