@@ -81,3 +81,9 @@ Different setups together with the code for running of the simulations can be fo
         
             - number of simulations conducted for statistical accuracy
             
+RESULTS:
+========
+
+results of the simulations can be plotted by running the read_and_plot.py file
+
+    - the file path has to be edited depednig on which resutls are being accessed
