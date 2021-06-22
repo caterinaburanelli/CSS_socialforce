@@ -44,7 +44,7 @@ def visualize(states, space, output_filename):
         context['update_function'] = update
 
 
-@pytest.mark.parametrize('n', [20])
+@pytest.mark.parametrize('n', [50])
 @pytest.mark.parametrize('half_len', [6])
 @pytest.mark.parametrize('half_width', [30])
 @pytest.mark.parametrize('mode', ["pillars"])
@@ -107,9 +107,9 @@ def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=True):
     
     elif (mode=="tot_horizontal"):
         space = [
-            np.array([(x, half_len) for x in np.linspace(-half_width, half_width, num=5000)]),
-            np.array([(x, -half_len) for x in np.linspace(-half_width, half_width, num=5000)]),
-            np.array([(x, 0) for x in np.linspace(-half_width, half_width, num=5000)])
+            np.array([(x, half_len) for x in np.linspace(-half_width, half_width, num=500)]),
+            np.array([(x, -half_len) for x in np.linspace(-half_width, half_width, num=500)]),
+            np.array([(x, 0) for x in np.linspace(-half_width, half_width, num=500)])
         ]
     elif (mode=="pillars"):
         a_values = np.arange(-half_width, half_width, 3)[1:]
@@ -227,7 +227,7 @@ def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=True):
   # run 50 simulations
    # save the data
     # make plots
-
+"""
 layouts = ["pillars"]
 peop_num = [70]
 sim_num = 30
@@ -253,3 +253,4 @@ for layout in layouts :
     print('{} DONE'.format(layout))
     dfs_layout.append(layout_df)
 final_df = pd.concat(dfs_layout)
+"""
