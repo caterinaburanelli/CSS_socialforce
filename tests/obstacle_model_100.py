@@ -89,15 +89,15 @@ def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=False):
             np.array([(i, i) for i in np.linspace(1, -1.0)])
         ]
     elif (mode=="pillars"):
-        a_values = np.arange(-half_width, half_width, 10)[1:]
+        a_values = np.arange(-half_width, half_width, 3)[1:]
         b = 0
-        radius = 0.3
+        radius = 0.2
         stepSize = 0.1
         t = 0
 
         space = [
-            np.array([(x, half_len) for x in np.linspace(-half_width, half_width, num=5000)]),
-            np.array([(x, -half_len) for x in np.linspace(-half_width, half_width, num=5000)])
+            np.array([(x, half_len) for x in np.linspace(-half_width, half_width, num=500)]),
+            np.array([(x, -half_len) for x in np.linspace(-half_width, half_width, num=500)])
         ]
 
         # create pillars
@@ -105,7 +105,7 @@ def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=False):
             positions = []
             t = 0
             while t < 2 * np.pi:
-                for r in np.linspace(0, radius, 5000):
+                for r in np.linspace(0, radius, 500):
                     coord = (r * np.cos(t) + a, r * np.sin(t) + b)
                     positions.append(coord)
                     t += stepSize
@@ -234,7 +234,7 @@ def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=False):
    # save the data
     # make plots
 
-layouts = ["benchmark"]
+layouts = ["pillars"]
 
 peop_num = np.linspace(20,120,10)
 sim_num = 30
