@@ -44,11 +44,11 @@ def visualize(states, space, output_filename):
         context['update_function'] = update
 
 
-@pytest.mark.parametrize('n', [60])
+@pytest.mark.parametrize('n', [50])
 @pytest.mark.parametrize('half_len', [6])
 @pytest.mark.parametrize('half_width', [30])
-@pytest.mark.parametrize('mode', ["tot_horizontal"])
-def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=False):
+@pytest.mark.parametrize('mode', ["pillars"])
+def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=True):
 
    # pos_left = ((np.random.random((n, 2)) - 0.5) * 2.0) * np.array([half_width, half_len])
    # pos_right = ((np.random.random((n, 2)) - 0.5) * 2.0) * np.array([half_width, half_len])
@@ -79,19 +79,19 @@ def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=False):
 
     if (mode=="benchmark"):
         space = [
-            np.array([(x, half_len) for x in np.linspace(-half_width, half_width, num=5000)]),
-            np.array([(x, -half_len) for x in np.linspace(-half_width, half_width, num=5000)])
+            np.array([(x, half_len) for x in np.linspace(-half_width, half_width, num=500)]),
+            np.array([(x, -half_len) for x in np.linspace(-half_width, half_width, num=500)])
         ]
     elif (mode=="pillars"):
-        a_values = np.arange(-half_width, half_width, 10)[1:]
+        a_values = np.arange(-half_width, half_width, 5)[1:]
         b = 0
         radius = 0.3
         stepSize = 0.1
         t = 0
 
         space = [
-            np.array([(x, half_len) for x in np.linspace(-half_width, half_width, num=5000)]),
-            np.array([(x, -half_len) for x in np.linspace(-half_width, half_width, num=5000)])
+            np.array([(x, half_len) for x in np.linspace(-half_width, half_width, num=500)]),
+            np.array([(x, -half_len) for x in np.linspace(-half_width, half_width, num=500)])
         ]
 
         # create pillars
@@ -99,7 +99,7 @@ def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=False):
             positions = []
             t = 0
             while t < 2 * np.pi:
-                for r in np.linspace(0, radius, 5000):
+                for r in np.linspace(0, radius, 500):
                     coord = (r * np.cos(t) + a, r * np.sin(t) + b)
                     positions.append(coord)
                     t += stepSize
@@ -107,10 +107,32 @@ def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=False):
     
     elif (mode=="tot_horizontal"):
         space = [
-            np.array([(x, half_len) for x in np.linspace(-half_width, half_width, num=5000)]),
-            np.array([(x, -half_len) for x in np.linspace(-half_width, half_width, num=5000)]),
-            np.array([(x, 0) for x in np.linspace(-half_width, half_width, num=5000)])
+            np.array([(x, half_len) for x in np.linspace(-half_width, half_width, num=500)]),
+            np.array([(x, -half_len) for x in np.linspace(-half_width, half_width, num=500)]),
+            np.array([(x, 0) for x in np.linspace(-half_width, half_width, num=500)])
         ]
+    elif (mode=="pillars"):
+        a_values = np.arange(-half_width, half_width, 3)[1:]
+        b = 0
+        radius = 0.2
+        stepSize = 0.1
+        t = 0
+
+        space = [
+            np.array([(x, half_len) for x in np.linspace(-half_width, half_width, num=500)]),
+            np.array([(x, -half_len) for x in np.linspace(-half_width, half_width, num=500)])
+        ]
+
+        # create pillars
+        for a in a_values:
+            positions = []
+            t = 0
+            while t < 2 * np.pi:
+                for r in np.linspace(0, radius, 500):
+                    coord = (r * np.cos(t) + a, r * np.sin(t) + b)
+                    positions.append(coord)
+                    t += stepSize
+            space.append(np.array(positions))
 
     s = socialforce.Simulator(initial_state, socialforce.PedSpacePotential(space))
     states = []
@@ -188,7 +210,7 @@ def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=False):
     paths = list(flatten(paths))
     paths = [paths[ind] for ind in nonzero]
 
-    velocities = [i / j for i, j in zip(times, paths)]
+    velocities = [i / j for i, j in zip(paths, times)]
 
 #    print(total, times, np.mean(times), velocities, np.mean(velocities)) # np.mean(times),, np.mean(velocities)
 
@@ -205,8 +227,8 @@ def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=False):
   # run 50 simulations
    # save the data
     # make plots
-
-layouts = ["tot_horizontal"]
+"""
+layouts = ["pillars"]
 peop_num = [70]
 sim_num = 30
 
@@ -231,4 +253,4 @@ for layout in layouts :
     print('{} DONE'.format(layout))
     dfs_layout.append(layout_df)
 final_df = pd.concat(dfs_layout)
-
+"""
