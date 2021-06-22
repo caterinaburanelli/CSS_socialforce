@@ -47,19 +47,6 @@ Install and Run
     pytest tests/*.py
 
 
-Ped-Ped-Space Scenarios
-=======================
-
-+----------------------------------------+----------------------------------------+
-| .. image:: docs/separator.gif          | .. image:: docs/gate.gif               |
-+----------------------------------------+----------------------------------------+
-| Emergent lane formation with           | Emergent lane formation with           |
-| 30 pedestrians:                        | 60 pedestrians:                        |
-|                                        |                                        |
-| .. image:: docs/walkway_30.gif         | .. image:: docs/walkway_60.gif         |
-+----------------------------------------+----------------------------------------
-
-
 EXPANSIONS:
 ===========
 
@@ -80,16 +67,17 @@ Different setups together with the code for running of the simulations can be fo
 
     - layouts: 
         'benchmark'
-            insert photo
+            .. image:: docs/walkway_benchmark_0_new4.gif 
         'horizontal'
-            insert photo
+            .. image:: docs/walkway_horizontal_0_new4.gif 
         'pillars'
-            insert photo
+            .. image:: docs/walkway_pillars_0_new4.gif 
         'single'
-            insert photo
+            .. image:: docs/walkway_single_0_new4.gif 
         'angled'
-            insert photo
+            .. image:: docs/walkway_angled_0_new4.gif 
         
         - number of people in the system at all times
         
             - number of simulations conducted for statistical accuracy
+            
