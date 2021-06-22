@@ -94,8 +94,8 @@ def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=True):
         ]
     elif (mode=="single"):
         space = [
-            np.array([(x, half_len) for x in np.linspace(-half_width, half_width, num=5000)]),
-            np.array([(x, -half_len) for x in np.linspace(-half_width, half_width, num=5000)]),
+            np.array([(x, half_len) for x in np.linspace(-half_width, half_width, num=500)]),
+            np.array([(x, -half_len) for x in np.linspace(-half_width, half_width, num=500)]),
             np.array([(i, i) for i in np.linspace(1, -1.0)])
         ]
     elif (mode=="pillars"):
@@ -259,7 +259,7 @@ def test_walkway_benchmark(n, half_len, half_width, mode, run=-1, visual=True):
    # save the data
     # make plots
 
-layouts = ["benchmark", "single", "pillars", "horizontal", "angled"]
+layouts = ["single"]
 peop_num = [20, 40, 60, 80, 100]
 sim_num = 30
 

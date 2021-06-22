@@ -83,7 +83,7 @@ class PedSpacePotential(object):
 
     def value_r_aB(self, r_aB):
         """Compute value parametrized with r_aB."""
-        return self.u0 * np.exp(-1.0 * np.linalg.norm(r_aB, axis=-1) / self.r)
+        return self.u0 * np.exp(-0.4 * np.linalg.norm(r_aB, axis=-1) / self.r)
 
     def r_aB(self, state):
         """r_aB"""

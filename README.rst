@@ -20,9 +20,9 @@ The contributors of this project are:
 .. image:: https://travis-ci.org/svenkreiss/socialforce.svg?branch=master
     :target: https://travis-ci.org/svenkreiss/socialforce
 
-source:
-Social Force Model
-==================
+
+source: Social Force Model
+==========================
 
 .. code-block::
 
@@ -56,9 +56,10 @@ EXPANSIONS:
 
 - different tendency of respawning on the agent's right side of the corridor
 
-- wider field of view
-
 - higher repulsive force between the agents and the obstacles
+
+    HOW TO IMPLEMENT:
+        - socialforce/potentials.py - line 86 - change to : return self.u0 * np.exp(-0.4 * np.linalg.norm(r_aB, axis=-1) / self.r)
 
 SIMULATIONS:
 ============
