@@ -11,7 +11,7 @@ The contributors of this project are:
 
 - Marija Pujic
 
-- Robert van Koesveld
+- Robbert van Koesveld
 
 - Iris Reitsma
 
