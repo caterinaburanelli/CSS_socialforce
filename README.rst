@@ -18,7 +18,7 @@ The contributors of this project are:
 
 The contributors added to the original code of the model the features listed 
 in the Expansions section; the source of the original code is:
-https://github.com/svenkreiss/socialforce
+https://github.com/svenkreiss/socialforce. 
 
 .. image:: https://travis-ci.org/svenkreiss/socialforce.svg?branch=master
     :target: https://travis-ci.org/svenkreiss/socialforce
