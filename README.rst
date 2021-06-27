@@ -16,6 +16,9 @@ The contributors of this project are:
 - Iris Reitsma
 
 
+The contributors added to the original code of the model the features listed 
+in the Expansions section; the source of the original code is:
+https://github.com/svenkreiss/socialforce
 
 .. image:: https://travis-ci.org/svenkreiss/socialforce.svg?branch=master
     :target: https://travis-ci.org/svenkreiss/socialforce
@@ -87,4 +90,4 @@ RESULTS:
 
 results of the simulations can be plotted by running the read_and_plot.py file
 
-    - the file path has to be edited depednig on which resutls are being accessed
+    - the file path has to be edited depending on which resutls are being accessed
